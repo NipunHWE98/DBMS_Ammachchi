@@ -1,0 +1,70 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/forms.css">
+    <link rel="stylesheet" href="/css/product.css">
+</head>
+
+<body>
+   <%- include('../includes/navigation.ejs') %>
+
+    <main>
+        <form class="Employee-form" action="/admin/<% if (editing) { %>edit-employee<% } else { %>add-employee<% } %>" method="POST">
+            <div class="form-control">
+                <label for="first_name">First_Name</label>
+                <input type="text" name="first_name" id="first_name" value="<% if (editing) { %><%= employee.firt_name %><% } %>">
+            </div>
+            <div class="form-control">
+                <label for="last_name">Last_Name</label>
+                <input type="text" name="last_name" id="last_name" value="<% if (editing) { %><%= employee.last_name %><% } %>">
+            </div>
+            <div class="form-control">
+                <label for="email">Email</label>
+                <input type="text" name="email" id="email" value="<% if (editing) { %><%= employee.email %><% } %>">
+            </div>
+            <div class="form-control">
+                <label for="contact_no">Contact_No</label>
+                <input type="text" name="contact_no" id="contact_no"  value="<% if (editing) { %><%= employee.contact_no %><% } %>">
+            </div>
+           
+            <% if (editing) { %>
+                <input type="hidden" value="<%= employee.essn %>" name="employeeId">
+            <% } %>
+
+            <button class="btn" type="submit"><% if (editing) { %>Update Employee<% } else { %>Add Employee<% } %></button>
+        </form>
+    </main>
+
+    <div class="table-data">
+        <h2>Display Data using Node.js & MySQL</h2>
+            <table border="1">
+                <tr>
+                    <th>Essn</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email Address</th>
+                    <th>Contact No</th>
+                </tr>
+                
+                <%
+                if(userData.length!=0){
+                var i=1;
+                userData.forEach(function(data){
+                %>
+                <tr>
+                    <td><%=i; %></td>
+                    <td><%=data.First_Name %></td>
+                    <td><%=data.Last_Name %></td>
+                    <td><%=data.Email %></td>
+                    <td><%=data.Contact_No %></td>
+                    <td><a href="/users/edit/<%=data.id%>">Edit</a></td>
+                    <td><a href="/users/delete/<%=data.id%>">Delete</a></td>
+                </tr>
+                <%  i++; }) %>
+                <% } else{ %>
+                    <tr>
+                        <td colspan="4">No Data Found</td>
+                    </tr>
+                <% } %>
+            </table>
+            </div>
+<%- include('../includes/end.ejs') %>
+
