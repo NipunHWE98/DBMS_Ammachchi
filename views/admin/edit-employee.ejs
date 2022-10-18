@@ -10,23 +10,23 @@
         <form class="Employee-form" action="/admin/<% if (editing) { %>edit-employee<% } else { %>add-employee<% } %>" method="POST">
             <div class="form-control">
                 <label for="first_name">First_Name</label>
-                <input type="text" name="first_name" id="first_name" value="<% if (editing) { %><%= employee.firt_name %><% } %>">
+                <input type="text" name="first_name" id="first_name" value="<% if (editing) { %><%= employee[0].First_Name %><% } %>">
             </div>
             <div class="form-control">
                 <label for="last_name">Last_Name</label>
-                <input type="text" name="last_name" id="last_name" value="<% if (editing) { %><%= employee.last_name %><% } %>">
+                <input type="text" name="last_name" id="last_name" value="<% if (editing) { %><%= employee[0].Last_Name %><% } %>">
             </div>
             <div class="form-control">
                 <label for="email">Email</label>
-                <input type="text" name="email" id="email" value="<% if (editing) { %><%= employee.email %><% } %>">
+                <input type="text" name="email" id="email" value="<% if (editing) { %><%= employee[0].Email %><% } %>">
             </div>
             <div class="form-control">
                 <label for="contact_no">Contact_No</label>
-                <input type="text" name="contact_no" id="contact_no"  value="<% if (editing) { %><%= employee.contact_no %><% } %>">
+                <input type="text" name="contact_no" id="contact_no"  value="<% if (editing) { %><%= employee[0].Contact_No %><% } %>">
             </div>
            
             <% if (editing) { %>
-                <input type="hidden" value="<%= employee.essn %>" name="employeeId">
+                <input type="hidden" value="<%= employee[0].Employee_Ssn %>" name="employeeId">
             <% } %>
 
             <button class="btn" type="submit"><% if (editing) { %>Update Employee<% } else { %>Add Employee<% } %></button>
@@ -34,7 +34,7 @@
     </main>
 
     <div class="table-data">
-        <h2>Display Data using Node.js & MySQL</h2>
+        <h2>Current Employees in Ammachchi Canteen</h2>
             <table border="1">
                 <tr>
                     <th>Essn</th>
@@ -55,8 +55,11 @@
                     <td><%=data.Last_Name %></td>
                     <td><%=data.Email %></td>
                     <td><%=data.Contact_No %></td>
-                    <td><a href="/users/edit/<%=data.id%>">Edit</a></td>
-                    <td><a href="/users/delete/<%=data.id%>">Delete</a></td>
+                    <td><a href="/admin/edit-employee/<%=data.Employee_Ssn%>?edit=true" class="btn">Edit</a></td>
+                    <td><form action="/admin/delete-employee" method="POST">
+                        <input type="hidden" value="<%= data.Employee_Ssn %>" name="employeeId">
+                        <button class="btn" type="submit">Delete</button>
+                    </form></td>
                 </tr>
                 <%  i++; }) %>
                 <% } else{ %>

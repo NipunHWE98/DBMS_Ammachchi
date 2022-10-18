@@ -19,7 +19,13 @@ router.post('/add-product', adminController.postAddProduct);
 // /admin/add-employee => POST
 router.post('/add-employee', adminController.postAddEmployee);
 
+router.post('/delete-employee',adminController.postDeleteEmployee);
+
+router.get('/edit-employee/:employeeId', adminController.getEditEmployee);
+
 router.get('/edit-product/:productId', adminController.getEditProduct);
+
+router.post('/edit-employee', adminController.postEditEmployee);
 
 router.post('/edit-product', adminController.postEditfoodItem);
 

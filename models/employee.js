@@ -18,14 +18,21 @@ module.exports = class Employee {
       [this.first_name, this.last_name, this.email, this.contact_no]
     );
   }
+  update(id){
 
-  static deleteById(id) {}
+    return db.execute('UPDATE employee_table SET First_Name=?,Last_Name=?,Email=?,Contact_No=? WHERE Employee_Ssn=?',
+    [this.first_name,this.last_name,this.email,this.contact_no,this.employee_ssn]);
+  }
+
+  static deleteById(id) {
+    return db.execute('DELETE from employee_table WHERE Employee_Ssn=?',[id]);
+  }
 
   static fetchAll() {
     return db.execute('SELECT * FROM employee_table');
   }
 
   static findById(id) {
-    return db.execute('SELECT * FROM employee_table WHERE products.id = ?', [id]);
+    return db.execute('SELECT * FROM employee_table WHERE employee_table.Employee_Ssn = ?', [id]);
   }
 };

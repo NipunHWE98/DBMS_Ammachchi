@@ -19,6 +19,7 @@ exports.getAddEmployee=(req,res,next)=>{
     editing: false,
     userData:rows
   });
+  console.log(rows);
  
 })
 .catch(err => console.log(err));
@@ -54,6 +55,30 @@ exports.postAddProduct = (req, res, next) => {
       res.redirect('/');
     })
     .catch(err => console.log(err));
+};
+
+exports.getEditEmployee = (req, res, next) => {
+  const editMode = req.query.edit;
+  if (!editMode) {
+    return res.redirect('/');
+  }
+  const employeeId = req.params.employeeId;
+  Employee.findById(employeeId).then(employee=>{
+    console.log(employee);
+    if (!employee) {
+      return res.redirect('/');
+    }
+    Employee.fetchAll().then(data=>{
+      console.log(data[0]);
+    res.render('admin/edit-employee', {
+      pageTitle: 'Edit Employee',
+      path: '/admin/edit-employee',
+      editing: editMode,
+      employee: employee[0],
+      userData:data[0]
+    });
+  }).catch(erro=>console.log(erro));
+  }).catch(err=>console.log(err)) ;
 };
 
 exports.getEditProduct = (req, res, next) => {
@@ -97,6 +122,25 @@ exports.postEditfoodItem = (req, res, next) => {
   
 };
 
+exports.postEditEmployee = (req, res, next) => {
+ 
+  const employee_ssn = req.body.employeeId;
+  const updated_first_name = req.body.first_name;
+  const updated_last_name = req.body.last_name;
+  const updatedemail = req.body.email;
+  const updatedcontact_no = req.body.contact_no;
+  const updatedEmployee = new Employee(
+    employee_ssn,
+    updated_first_name,
+    updated_last_name,
+    updatedemail,
+    updatedcontact_no
+  );
+  updatedEmployee.update(employee_ssn).then(emp=>{res.redirect('/admin/add-employee');}).catch(err=>console.log(err));
+  
+};
+
+
 exports.postEditProduct = (req, res, next) => {
   const prodId = req.body.productId;
   const updatedTitle = req.body.title;
@@ -124,6 +168,13 @@ exports.getProducts = (req, res, next) => {
     });
   })
   .catch(err => console.log(err));
+};
+exports.postDeleteEmployee = (req, res, next) => {
+  const employeeId = req.body.employeeId;
+  console.log(req.body);
+  console.log(employeeId);
+  Employee.deleteById(employeeId).then(func=>{res.redirect('/admin/add-employee');}).catch(err=>console.log(err));
+  
 };
 exports.postDeleteFoodItem = (req, res, next) => {
   const prodId = req.body.productId;
