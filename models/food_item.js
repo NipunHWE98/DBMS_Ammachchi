@@ -14,25 +14,26 @@ module.exports = class Food_item {
   }
 
   save() {
-    console.log(this.name);
-    console.log(this.imageUrl);
-    console.log(this.description);
-    console.log(this.price);
-    console.log(this.availability);
-    console.log(this.employeeSsn);
+    
     return db.execute(
       'INSERT INTO food_item_table (Name, Price, Image, Discription,Employee_Ssn,Availability) VALUES (?, ?, ?, ?,?,?)',
       [this.name, this.price, this.imageUrl, this.description,this.employeeSsn,this.availability]
     );
   }
 
-  static deleteById(id) {}
+  static deleteById(id) {
+    return db.execute('DELETE FROM food_item_table WHERE  food_item_table.ID = ?',[id]);
+  }
+  
+  update(id) {
+    return db.execute('UPDATE food_item_table SET  Price=?, Name=?, Discription=?,Image=?,Employee_Ssn=? WHERE food_item_table.ID = ?', [this.price,this.name,this.description,this.imageUrl,this.employeeSsn,this.id]);
+  }
 
   static fetchAll() {
     return db.execute('SELECT * FROM food_item_table');
   }
 
   static findById(id) {
-    return db.execute('SELECT * FROM food_item_table WHERE products.id = ?', [id]);
+    return db.execute('SELECT * FROM food_item_table WHERE food_item_table.ID = ?', [id]);
   }
 };
