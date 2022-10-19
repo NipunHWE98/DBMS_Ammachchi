@@ -55,6 +55,8 @@
                     <td><%=data.Last_Name %></td>
                     <td><%=data.Email %></td>
                     <td><%=data.Contact_No %></td>
+                    <td><a href="/admin/add-role/<%=data.Employee_Ssn%>" class="btn">Add Role</a></td>
+                    <td><a href="/admin//add-product/<%=data.Employee_Ssn%>" class="btn">Add_Food_Item</a></td>
                     <td><a href="/admin/edit-employee/<%=data.Employee_Ssn%>?edit=true" class="btn">Edit</a></td>
                     <td><form action="/admin/delete-employee" method="POST">
                         <input type="hidden" value="<%= data.Employee_Ssn %>" name="employeeId">

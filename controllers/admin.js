@@ -32,12 +32,18 @@ exports.postAddEmployee = (req, res, next) => {
   const last_name = req.body.last_name;
   const email = req.body.email;
   const contact_no = req.body.contact_no;
-  const employee = new Employee(null, first_name,last_name,email,contact_no);
+  const user_name='user';
+  const password='user'
+  const employee = new Employee(null, first_name,last_name,email,contact_no,user_name,password);
   employee
     .save()
     .then(() => {
-      res.redirect('/');
+      
+        res.redirect('/');
+      
+      
     })
+    
     .catch(err => console.log(err));
 };
 
