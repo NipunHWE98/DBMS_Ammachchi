@@ -4,7 +4,7 @@ const db = require('../util/database');
 
 module.exports = class Employee {
   constructor( employee_ssn, first_name, last_name, email,contact_no,user_name,password) {
-    this.employee_ssn= 7;
+    this.employee_ssn=  employee_ssn;
     this.first_name = first_name;
     this.last_name = last_name;
     this.email = email;

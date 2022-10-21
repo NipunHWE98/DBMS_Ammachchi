@@ -22,4 +22,8 @@ router.get('/orders', shopController.getOrders);
 
 router.get('/checkout', shopController.getCheckout);
 
+router.get('/add-complain',shopController.getAddComplain);
+
+router.post('/add-complain',shopController.postAddComplain);
+
 module.exports = router;

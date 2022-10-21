@@ -1,6 +1,7 @@
 const Product = require('../models/product');
 const Food_item = require('../models/food_item');
 const Cart = require('../models/cart');
+const Complain=require('../models/complain')
 
 exports.getProducts = (req, res, next) => {
   Food_item.fetchAll()
@@ -30,7 +31,6 @@ exports.getProduct = (req, res, next) => {
 exports.getIndex = (req, res, next) => {
   Food_item.fetchAll()
     .then(([rows, fieldData]) => {
-      console.log(rows);
       res.render('shop/index', {
         prods: rows,
         pageTitle: 'Shop',
@@ -75,6 +75,22 @@ exports.postCartDeleteProduct = (req, res, next) => {
     Cart.deleteProduct(prodId, product.price);
     res.redirect('/cart');
   });
+};
+
+exports.getAddComplain=(req,res,next)=>{
+  res.render('shop/add-complain',{
+    path: '/add-complain',
+    pageTitle: 'Add a Complain'
+  });
+};
+
+exports.postAddComplain=(req,res,next)=>{
+const cus_id=2;
+const name=req.body.name;
+const discription=req.body.complain;
+const email=req.body.email;
+const newcomplain=new Complain(cus_id,name,email,discription);
+newcomplain.save().then(res.redirect('/')).catch(err=>console.log(err));
 };
 
 exports.getOrders = (req, res, next) => {

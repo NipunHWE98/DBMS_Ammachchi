@@ -1,14 +1,49 @@
 const Food_item = require('../models/food_item');
 const Product = require('../models/product');
 const Employee=require('../models/employee');
+const Role=require('../models/role');
 const e = require('express');
 
 exports.getAddProduct = (req, res, next) => {
   res.render('admin/edit-product', {
     pageTitle: 'Add Product',
     path: '/admin/add-product',
-    editing: false
+    editing: false,
+    id:false,
   });
+};
+
+exports.getAddProductwithID = (req, res, next) => {
+  const employeeId = [{Employee_Ssn:req.params.Employee_Ssn,Name:" ",Peice:" ",Image:" ",Discription:" "},{ }];
+  res.render('admin/edit-product', {
+    pageTitle: 'Add Product',
+    path: '/admin/add-product/:Employee_Ssn',
+    editing : true,
+    id:false,
+    product : employeeId
+  });
+};
+exports.getAddRole = (req, res, next) => {
+  const employeeId = req.params.employeeId;
+  res.render('admin/add-role', {
+    pageTitle: 'Add role',
+    path: '/admin/add-role',
+    editing: true,
+    employeeId:employeeId
+  });
+};
+exports.postAddRole = (req, res, next) => {
+  const employee_ssn = req.body.essn;
+  const role = req.body.role;
+  const erole=new Role(employee_ssn,role);
+  erole
+    .save()
+    .then(() => {
+      
+        res.redirect('/admin/add-employee');
+    })
+    
+    .catch(err => console.log(err));
 };
 exports.getAddEmployee=(req,res,next)=>{
   Employee.fetchAll()
@@ -80,6 +115,7 @@ exports.getEditEmployee = (req, res, next) => {
       pageTitle: 'Edit Employee',
       path: '/admin/edit-employee',
       editing: editMode,
+     
       employee: employee[0],
       userData:data[0]
     });
@@ -101,6 +137,7 @@ exports.getEditProduct = (req, res, next) => {
       pageTitle: 'Edit Product',
       path: '/admin/edit-product',
       editing: editMode,
+      id:true,
       product: product[0]
     });
   }).catch(err=>console.log(err)) ;

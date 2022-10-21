@@ -1,0 +1,32 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/forms.css">
+    <link rel="stylesheet" href="/css/product.css">
+</head>
+
+<body>
+   <%- include('../includes/navigation.ejs') %>
+
+    <main>
+        <form class="Complain-form" action="add-complain" method="POST">
+            <div class="form-control">
+                <label for="cus_id">Customer ID</label>
+                <input type="text" name="cus_id" id="cus_id">
+            </div>
+            <div class="form-control">
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name">
+            </div>
+            <div class="form-control">
+                <label for="email">Email</label>
+                <input type="text" name="email" id="email" >
+            </div>
+            <div class="form-control">
+                <label for="complain">Complain/Suggestion</label>
+                <textarea name="complain" id="complain" rows="8" ></textarea>
+            </div>
+           
+            
+
+            <button class="btn" type="submit">Add Complain</button>
+        </form>
+    </main>

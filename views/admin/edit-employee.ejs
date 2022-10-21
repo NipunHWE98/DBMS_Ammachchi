@@ -37,6 +37,7 @@
         <h2>Current Employees in Ammachchi Canteen</h2>
             <table border="1">
                 <tr>
+                    <th>Record_No</th>
                     <th>Essn</th>
                     <th>First Name</th>
                     <th>Last Name</th>
@@ -50,7 +51,8 @@
                 userData.forEach(function(data){
                 %>
                 <tr>
-                    <td><%=i; %></td>
+                    <td><%=i %></td>
+                    <td><%=data.Employee_Ssn; %></td>
                     <td><%=data.First_Name %></td>
                     <td><%=data.Last_Name %></td>
                     <td><%=data.Email %></td>
