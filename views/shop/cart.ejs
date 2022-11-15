@@ -3,20 +3,40 @@
     </head>
 
     <body>
-        <%- include('../includes/navigation.ejs') %>
+        <% if( role==="Admin"){%> <%- include('../includes/admin-navigation.ejs') %><% } 
+        else if(role==="Cashier") { %>
+           <%- include('../includes/cashier-navigation.ejs') %>
+           <% }  else if(role==="Customer") { %>
+               <%- include('../includes/customer-navigation.ejs') %>
+               <% }else if(role==="Chef") { %>
+                   <%- include('../includes/chef-navigation.ejs') %>
+                   <% }
+                else  { %>
+                   <%- include('../includes/navigation.ejs') %>
+                   <% } %>
         <main>
             <% if (products.length > 0) { %>
                 <ul class="cart__item-list">
+                    <h1>Total Cost :<%=Price%></h1>
+                    
                     <% products.forEach(p => { %>
                         <li class="cart__item">
-                            <h1><%= p.productData.title %></h1>
+                            <h1><%= p.productData.Name %></h1>
                             <h2>Quantity: <%= p.qty %></h2>
                             <form action="/cart-delete-item" method="POST">
-                                <input type="hidden" value="<%= p.productData.id %>" name="productId">
+                                <input type="hidden" value="<%= p.productData.ID %>" name="productId">
                                 <button class="btn danger" type="submit">Delete</button>
                             </form>
                         </li>
                     <% }) %>
+                    <br>
+                    <form action="/place-order" method="POST">
+                        
+                        <button class="btn" type="submit">Confirm Order</button>
+                    </form>
+                    
+                    
+                    
                 </ul>
             <% } else { %>
                 <h1>No Products in Cart!</h1>

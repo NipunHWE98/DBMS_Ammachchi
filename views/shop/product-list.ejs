@@ -3,12 +3,22 @@
     </head>
 
     <body>
-        <%- include('../includes/navigation.ejs') %>
+        <% if( role==="Admin"){%> <%- include('../includes/admin-navigation.ejs') %><% } 
+        else if(role==="Cashier") { %>
+           <%- include('../includes/cashier-navigation.ejs') %>
+           <% }  else if(role==="Customer") { %>
+               <%- include('../includes/customer-navigation.ejs') %>
+               <% }else if(role==="Chef") { %>
+                   <%- include('../includes/chef-navigation.ejs') %>
+                   <% }
+                else  { %>
+                   <%- include('../includes/navigation.ejs') %>
+                   <% } %>
 
             <main>
                 <% if (prods.length > 0) { %>
                     <div class="grid">
-                        <% for (let product of prods) { %>
+                        <% for (let product of prods) { if(product.Availability===1){%>
                             <article class="card product-item">
                                 <header class="card__header">
                                     <h1 class="product__title">
@@ -31,7 +41,8 @@
                                     <%- include('../includes/add-to-cart.ejs', {product: product}) %>
                                 </div>
                             </article>
-                            <% } %>
+                            <% } 
+                        }%>
                     </div>
                     <% } else { %>
                         <h1>No Products Found!</h1>

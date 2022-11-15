@@ -7,7 +7,7 @@
    <%- include('../includes/navigation.ejs') %>
 
     <main>
-        <form class="login-form" action="/login" method="POST">
+        <form class="login-form" action="/employee-login" method="POST">
             <div class="form-control">
                 <label for="email">E-Mail</label>
                 <input type="email" name="email" id="email">
@@ -16,10 +16,15 @@
                 <label for="password">Password</label>
                 <input type="password" name="password" id="password">
             </div>
+            <div class="form-control">
+            <label for="role">Choose the Role:</label>
+            <select id="role" name="role">
+              <option value="admin">Admin</option>
+              <option value="chef">Chef</option>
+              <option value="cashier">Cashier</option>
+            </select>
+             </div>
             <button class="btn" type="submit">Login</button>
-            <a href="/register">
-                <button class="btn" type="button"  >Signup</button>
-               </a>
         
         </form>
         

@@ -3,6 +3,8 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const mysql2 = require('mysql2/promise');
+const MySQLStore = require('express-mysql-session')(session);
 
 const errorController = require('./controllers/error');
 const db = require('./util/database');

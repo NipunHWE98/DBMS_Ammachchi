@@ -10,6 +10,8 @@ exports.getAddProduct = (req, res, next) => {
     path: '/admin/add-product',
     editing: false,
     id:false,
+    isLoggedin:req.session.isLoggedIn,
+        role:req.session.role
   });
 };
 
@@ -20,7 +22,8 @@ exports.getAddProductwithID = (req, res, next) => {
     path: '/admin/add-product/:Employee_Ssn',
     editing : true,
     id:false,
-    product : employeeId
+    product : employeeId,isLoggedin:req.session.isLoggedIn,
+    role:req.session.role
   });
 };
 exports.getAddRole = (req, res, next) => {
@@ -52,7 +55,8 @@ exports.getAddEmployee=(req,res,next)=>{
     pageTitle: 'Add Employee',
     path: '/admin/add-employee',
     editing: false,
-    userData:rows
+    userData:rows,isLoggedin:req.session.isLoggedIn,
+    role:req.session.role
   });
   console.log(rows);
  
@@ -117,7 +121,9 @@ exports.getEditEmployee = (req, res, next) => {
       editing: editMode,
      
       employee: employee[0],
-      userData:data[0]
+      userData:data[0],
+      isLoggedin:req.session.isLoggedIn,
+        role:req.session.role
     });
   }).catch(erro=>console.log(erro));
   }).catch(err=>console.log(err)) ;
@@ -138,7 +144,9 @@ exports.getEditProduct = (req, res, next) => {
       path: '/admin/edit-product',
       editing: editMode,
       id:true,
-      product: product[0]
+      product: product[0],
+      isLoggedin:req.session.isLoggedIn,
+      role:req.session.role
     });
   }).catch(err=>console.log(err)) ;
 };
@@ -207,7 +215,9 @@ exports.getProducts = (req, res, next) => {
     res.render('admin/products', {
       prods: rows,
       pageTitle: 'Admin Products',
-      path: '/admin/products'
+      path: '/admin/products',
+      isLoggedin:req.session.isLoggedIn,
+        role:req.session.role
     });
   })
   .catch(err => console.log(err));

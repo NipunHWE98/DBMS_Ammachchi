@@ -1,0 +1,56 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/forms.css">
+    <link rel="stylesheet" href="/css/product.css">
+</head>
+
+<body>
+    <% if( role==="Admin"){%> <%- include('../includes/admin-navigation.ejs') %><% } 
+    else if(role==="Cashier") { %>
+       <%- include('../includes/cashier-navigation.ejs') %>
+       <% }  else if(role==="Customer") { %>
+           <%- include('../includes/customer-navigation.ejs') %>
+           <% }else if(role==="Chef") { %>
+               <%- include('../includes/chef-navigation.ejs') %>
+               <% }
+            else  { %>
+               <%- include('../includes/navigation.ejs') %>
+               <% } %>
+
+    <main>
+        <form class="Customer-form" action="/<% if (editing) { %>edit-customer<% } else { %>add-customer<% } %>" method="POST">
+            <div class="form-control">
+                <label for="first_name">First_Name</label>
+                <input type="text" name="first_name" id="first_name" value="<% if (editing) { %><%= customer[0].First_Name %><% } %>">
+            </div>
+            <div class="form-control">
+                <label for="last_name">Last_Name</label>
+                <input type="text" name="last_name" id="last_name" value="<% if (editing) { %><%= customer[0].Last_Name %><% } %>">
+            </div>
+            <div class="form-control">
+                <label for="email">Email</label>
+                <input type="text" name="email" id="email" value="<% if (editing) { %><%= customer[0].Email %><% } %>">
+            </div>
+            <div class="form-control">
+                <label for="contact_no">Contact_No</label>
+                <input type="text" name="contact_no" id="contact_no"  value="<% if (editing) { %><%= customer[0].Contact_No %><% } %>">
+            </div>
+            <div class="form-control">
+                <label for="username">User_Name</label>
+                <input type="text" name="user_name" id="user_name"  >
+            </div>
+            <div class="form-control">
+                <label for="password">Password</label>
+                <input type="text" name="password" id="password"  >
+            </div>
+            
+           
+            <% if (editing) { %>
+                <input type="hidden" value="<%= employee[0].Employee_Ssn %>" name="employeeId">
+            <% } %>
+
+            <button class="btn" type="submit"><% if (editing) { %>Update Employee<% } else { %>Add Employee<% } %></button>
+        </form>
+    </main>
+
+<%- include('../includes/end.ejs') %>
+

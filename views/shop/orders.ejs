@@ -2,7 +2,17 @@
     </head>
 
     <body>
-        <%- include('../includes/navigation.ejs') %>
+        <% if( role==="Admin"){%> <%- include('../includes/admin-navigation.ejs') %><% } 
+        else if(role==="Cashier") { %>
+           <%- include('includes/cashier-navigation.ejs') %>
+           <% }  else if(role==="Customer") { %>
+               <%- include('../includes/customer-navigation.ejs') %>
+               <% }else if(role==="Chef") { %>
+                   <%- include('../includes/chef-navigation.ejs') %>
+                   <% }
+                else  { %>
+                   <%- include('../includes/navigation.ejs') %>
+                   <% } %>
         <main>
             <h1>Nothing there!</h1>
         </main>

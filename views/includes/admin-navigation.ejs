@@ -4,19 +4,6 @@
     <nav class="main-header__nav">
         <ul class="main-header__item-list">
             <li class="main-header__item">
-                <a class="<%= path === '/' ? 'active' : '' %>" href="/">Ammachchi Canteen</a>
-            </li>
-            <li class="main-header__item">
-                <a class="<%= path === '/products' ? 'active' : '' %>" href="/products">Food_Items</a>
-            </li><!--
-            <li class="main-header__item">
-                <a class="<%= path === '/cart' ? 'active' : '' %>" href="/cart">Cart</a>
-            </li>
-            
-            <li class="main-header__item">
-                <a class="<%= path === '/orders' ? 'active' : '' %>" href="/orders">Orders</a>
-            </li>
-            <li class="main-header__item">
                 <a class="<%= path === '/admin/add-employee' ? 'active' : '' %>" href="/admin/add-employee">Add Employee</a>
             </li>
             <li class="main-header__item">
@@ -28,9 +15,8 @@
                 </a>
             </li>
             <li class="main-header__item">
-                <a class="<%= path === '/add-complain' ? 'active' : '' %>" href="/add-complain">Add Complain/Suggestion
+                <a class="<%= path === '/admin/add-role' ? 'active' : '' %>" href="/admin/add-role">Add Role
                 </a>
-            </li>
             <li class="main-header__item">
                 <a class="<%= path === '/admin/complains' ? 'active' : '' %>" href="/admin/complains">Complains
                 </a>
@@ -38,7 +24,7 @@
             <li class="main-header__item">
                 <a class="<%= path === '/admin/products' ? 'active' : '' %>" href="/admin/products">Admin Products
                 </a>
-            </li>-->
+            </li>
             <li class="main-header__item">
                 <% if(!isLoggedin){%><a class="<%= path === '/userSelect' ? 'active' : '' %>" href="/userSelect">Login</a><%}
                 else{ %><a class="<%= path === '/logout' ? 'active' : '' %>" href="/logout">Logout</a><% } %>
@@ -50,19 +36,14 @@
 <nav class="mobile-nav">
         <ul class="mobile-nav__item-list">
                 <li class="mobile-nav__item">
-                    <a class="<%= path === '/' ? 'active' : '' %>" href="/">Shop</a>
+                    <a class="<%= path === '/admin/add-employee' ? 'active' : '' %>" href="/admin/add-employee">Add Employee</a>                    </a>
                 </li>
                 <li class="mobile-nav__item">
-                    <a class="<%= path === '/products' ? 'active' : '' %>" href="/products">Products</a>
+                    <a class="<%= path === '/admin/add-product' ? 'active' : '' %>" href="/admin/add-product">Add Food_Item
+                    </a>
                 </li>
                 <li class="mobile-nav__item">
-                    <a class="<%= path === '/cart' ? 'active' : '' %>" href="/cart">Cart</a>
-                </li>
-                <li class="mobile-nav__item">
-                    <a class="<%= path === '/orders' ? 'active' : '' %>" href="/orders">Orders</a>
-                </li>
-                <li class="mobile-nav__item">
-                    <a class="<%= path === '/admin/add-product' ? 'active' : '' %>" href="/admin/add-product">Add Product
+                    <a class="<%= path === '/register' ? 'active' : '' %>" href="/register">Customer Registration
                     </a>
                 </li>
                 <li class="mobile-nav__item">
@@ -70,7 +51,7 @@
                     </a>
                 </li>
                 <li class="mobile-nav__item">
-                    <a class="<%= path === '/register' ? 'active' : '' %>" href="/register">Customer Registration
+                    <a class="<%= path === '/admin/complains' ? 'active' : '' %>" href="/admin/complains">Complains
                     </a>
                 </li>
                 <li class="mobile-nav__item">

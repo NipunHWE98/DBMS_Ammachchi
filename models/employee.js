@@ -38,4 +38,18 @@ module.exports = class Employee {
   static findById(id) {
     return db.execute('SELECT * FROM employee_table WHERE employee_table.Employee_Ssn = ?', [id]);
   }
+  static findOfferingFood(id){
+    return db.execute('SELECT * FROM  employee_table JOIN food_item_table as employee_food  WHERE employee_table.Employee_Ssn=?',[id])
+  }
+  static employeeLogin(id){
+    return db.execute('UPDATE food_item_table SET Availability =? WHERE food_item_table.Employee_Ssn = ?',[1,id])
+  }
+  static employeeLogout(id){
+    return db.execute('UPDATE food_item_table SET Availability =? WHERE food_item_table.Employee_Ssn = ?',[0,id])
+
+  }
+  static getFoodItems(id){
+    return db.execute('SELECT * FROM employee_table  WHERE employee_table.Employee_Ssn = ?', [id]);
+
+  }
 };

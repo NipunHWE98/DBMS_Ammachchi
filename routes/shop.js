@@ -8,6 +8,8 @@ const router = express.Router();
 
 router.get('/', shopController.getIndex);
 
+router.get('/register', shopController.getRegister);
+
 router.get('/products', shopController.getProducts);
 
 router.get('/products/:productId', shopController.getProduct);
@@ -25,5 +27,7 @@ router.get('/checkout', shopController.getCheckout);
 router.get('/add-complain',shopController.getAddComplain);
 
 router.post('/add-complain',shopController.postAddComplain);
+
+router.post('/signup',shopController.postSignup);
 
 module.exports = router;
