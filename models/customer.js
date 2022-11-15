@@ -37,5 +37,8 @@ module.exports = class Customer {
   static findById(id) {
     return db.execute('SELECT * FROM customer WHERE customer.ID = ?', [id]);
   }
+  static findpendingOrders(id){
+    return db.execute('SELECT * FROM  order_table   WHERE customer_ID =?',[id])
+  }
   
 };

@@ -5,6 +5,7 @@ const Complain=require('../models/complain');
 const Employee=require('../models/employee');
 const session = require('express-session');
 const Customer=require('../models/customer');
+const Order=require('../models/order');
 
 
 exports.getProducts = (req, res, next) => {
@@ -96,7 +97,7 @@ exports.getCart = (req, res, next) => {
             cartProducts.push({ productData: product, qty: cartProductData.qty });
           }
         }
-        console.log("----------------------");
+       
 
         res.render('shop/cart', {
           path: '/cart',
@@ -148,6 +149,60 @@ exports.getAddComplain=(req,res,next)=>{
         role:req.session.role
   });
 };
+exports.postOrder=(req,res,next)=>{
+  console.log(session);
+  //console.log("Is logged in"+req.session.role);
+ // if(req.session.isLoggedIn){
+
+  
+
+Order.getOrderID().then((orderID)=>{
+
+
+  Cart.getCart(cart => {
+    let date_ob = new Date();
+
+      const order_id=  orderID;
+      const order_place_time = date_ob.getHours()+":"+date_ob.getMinutes() ;
+      const order_pickup_time = null;
+      const cus_id=1;
+      const charge=cart.totalPrice;
+      const date=date_ob;
+      console.log(order_place_time);
+      const order=new Order(order_id,order_place_time,order_pickup_time,cus_id,charge,date);
+      order.addOrder().then(( )=>{console.log(req.session.tid);
+        
+    Food_item.fetchAll().then(products => {
+      
+      const cartProducts = [];
+      
+      for (product of products[0]) {
+          const cartProductData = cart.products.find(
+          prod => prod.id === product.ID
+        );
+         
+        if (cartProductData) {
+         
+
+          Employee.getEmployeeByFood(cartProductData.id).then(em_id=>{
+            console.log(cartProductData.id);
+            order.addFoodOrder(orderID[0][0].ID,cartProductData.id,cartProductData.qty,em_id[0][0].Employee_Ssn);
+          }).catch(err=>console.log(err));         
+        }
+      }
+    }).catch(err => console.log(err));}).catch(err=>console.log(err)); 
+  });
+  res.redirect('back');
+  Cart.emptyCart();
+  
+  
+}).catch(err=>console.log(err));
+ // }
+  //else{
+   // res.redirect('/login');
+ // }
+
+};
 
 exports.postSignup=(req,res,next)=>{
   console.log("Signup called");
@@ -171,12 +226,16 @@ newcomplain.save().then(res.redirect('/')).catch(err=>console.log(err));
 };
 
 exports.getOrders = (req, res, next) => {
+  Customer.findpendingOrders(1).then(data => {
+    console.log(data[0]);
   res.render('shop/orders', {
     path: '/orders',
     pageTitle: 'Your Orders',
     isLoggedin:req.session.isLoggedIn,
-        role:req.session.role
+        role:req.session.role,
+        data:data[0]
   });
+})
 };
 
 exports.getCheckout = (req, res, next) => {

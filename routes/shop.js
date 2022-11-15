@@ -30,4 +30,6 @@ router.post('/add-complain',shopController.postAddComplain);
 
 router.post('/signup',shopController.postSignup);
 
+router.post('/place-order',shopController.postOrder);
+
 module.exports = router;

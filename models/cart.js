@@ -85,6 +85,12 @@ module.exports = class Cart {
       });
     });
   }
+  static emptyCart() {
+    const empty={"products":[],"totalPrice":0};
+    fs.writeFile(p,JSON.stringify(empty), err => {
+      console.log(err);
+    });
+  }
 
   static getCart(cb) {
     fs.readFile(p, (err, fileContent) => {

@@ -14,6 +14,35 @@
                    <%- include('../includes/navigation.ejs') %>
                    <% } %>
         <main>
-            <h1>Nothing there!</h1>
+            <div class="table-data">
+                <h2>Pending Orders</h2>
+                    <table border="1">
+                        <tr>
+                            <th>Order No</th>
+                            <th>Order Placed Time</th>
+                            <th>Order Pickup Time</th>
+                        </tr>
+                        
+                        <%
+                        if(data.length!=0){
+                        var i=1;
+                        data.forEach(function(data){
+                        %>
+                        <tr>
+                            <td><%=data.ID; %></td>
+                            <td><%=data.Order_Placed_Time %></td>
+                            <td><%=data.Order_Pickup_Time %></td>
+                            </form></td>
+                        </tr>
+                        <%  i++; }) %>
+                        <% } else{ %>
+                            <tr>
+                                <td colspan="4">No pending Orders</td>
+                            </tr>
+                        <% } %>
+                    </table>
+                    </div>
+        
+        
         </main>
         <%- include('../includes/end.ejs') %>

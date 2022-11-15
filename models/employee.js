@@ -52,4 +52,8 @@ module.exports = class Employee {
     return db.execute('SELECT * FROM employee_table  WHERE employee_table.Employee_Ssn = ?', [id]);
 
   }
+  static getEmployeeByFood(id){
+    return db.execute('SELECT Employee_Ssn FROM food_item_table  WHERE food_item_table.ID = ?', [id]);
+
+  }
 };

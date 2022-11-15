@@ -36,20 +36,20 @@ exports.postEmployeeLogin = (req, res, next) => {
     case 'admin':
       
       req.session.role = 'Admin';
-      //res.session.em_id='1';
+      req.session.tid='1';
       res.redirect('/');
       break;
     case 'chef':
      
       req.session.role = 'Chef';
-      //res.session.em_id='2';
+      req.session.tid='2';
       Employee.employeeLogin(3);
       res.redirect('/');
       break;
     case 'cashier':
       
       req.session.role = 'Cashier';
-      //res.session.em_id='3';
+      req.session.tid='3';
       res.redirect('/');
   }
  
@@ -75,5 +75,6 @@ exports.getLogoutCustomer = (req, res, next) => {
 exports.postLogin = (req, res, next) => {
   req.session.isLoggedIn = true;
   req.session.role = 'Customer';
+  req.session.tid='1';
   res.redirect('/');
 };
